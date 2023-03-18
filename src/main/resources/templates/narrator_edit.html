@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Narrator</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css">
+  <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+</head>
+<body class="p-2 mb-2 bg-dark text-white">
+
+<form th:action="@{/update_narrator}" method="post">
+  <label for="narrator_id">#</label>
+  <input type="text" name="id" readonly id="narrator_id" th:value="${narrator.id}">
+  <label for="narrator_name">Name:</label>
+  <input type="text" name="name" id="narrator_name" th:value="${narrator.name}">
+  <label for="year_of_experience">Experience:</label>
+  <input type="number" name="experience" id="year_of_experience" th:value="${narrator.experience}">
+  <label for="narrator_resume">Resume:</label>
+  <input type="text" name="resume" id="narrator_resume" th:value="${narrator.resume}">
+  <input type="submit" value="SAVE" class="btn btn-primary">
+</form>
+
+<script th:src="@{/webjars/jquery/3.6.3/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.16.1-1/umd/popper.min.js}"></script>
+
+</body>
+</html>

@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Broadcasts</title>
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
 </head>
-<body>
-$END$
+<body class="p-2 mb-2 bg-dark text-white">
+  <h1>Broadcast List</h1>
+    <table id="broadcasts" class="table text-white">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Duration</th>
+            <th>Cost</th>
+            <th>Narrator</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="b : ${broadcasts}">
+            <td th:text="${b.id}"></td>
+            <td th:text="${b.name}"></td>
+            <td th:text="${b.duration}"></td>
+            <td th:text="${b.cost}"></td>
+            <td th:text="${b.narrator.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+  <form action="add_broadcast" method="post">
+      <label for="broadcast_name">Name:</label>
+      <input type="text" name="name" id="broadcast_name">
+      <label for="narrator_name">Narrator:</label>
+      <select name="narrator" id="narrator_name">
+          <option th:each="narrator:${narrators}" th:value="${narrator}" th:utext="${narrator.getName()}"></option>
+      </select>
+      <input type="submit" value="Add" class="btn btn-primary">
+  </form>
+
+  <script th:src="@{/webjars/jquery/3.6.3/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
 </body>
 </html>

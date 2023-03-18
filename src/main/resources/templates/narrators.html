@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Narrators</title>
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <link th:rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
 </head>
-<body>
-$END$
+<body class="p-2 mb-2 bg-dark text-white">
+
+<h1>Narrators</h1>
+<table id="narrators" class="table text-white">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Experience</th>
+        <th>Resume</th>
+        <th>Broadcasts with this narrator</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="n : ${narrators}">
+        <td th:text="${n.id}"></td>
+        <td th:text="${n.name}"></td>
+        <td th:text="${n.experience}"></td>
+        <td th:text="${n.resume}"></td>
+        <td><a th:href="@{/narrator_broadcasts/{id}(id=${n.id})}">show broadcasts</a></td>
+        <td>
+            <form th:action="@{/deleteNarrator}" method="post">
+                <input type="hidden" name="id" th:value="${n.id}">
+                <input type="submit" value="delete" class="btn btn-danger">
+            </form>
+        </td>
+        <td><a th:href="@{/narrator_edit/{id}(id=${n.id})}">edit</a></td>
+    </tr>
+    </tbody>
+</table>
+<form action="add_narrator" method="post">
+    <label for="narrator_name">Name:</label>
+    <input type="text" name="name" id="narrator_name">
+    <label for="year_of_experience">Experience:</label>
+    <input type="number" name="experience" id="year_of_experience">
+    <label for="narrator_resume">Resume:</label>
+    <input type="text" name="resume" id="narrator_resume">
+    <input type="submit" value="Add" class="btn btn-primary">
+</form>
+
+<script th:src="@{/webjars/jquery/3.6.3/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.16.1-1/umd/popper.min.js}"></script>
 </body>
 </html>

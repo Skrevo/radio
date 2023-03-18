@@ -1,4 +1,7 @@
 package com.example.radio.repositories;
 
-public interface BroadcastRepository extends org.springframework.data.jpa.repository.JpaRepository<com.example.radio.entities.Broadcast, java.lang.Long> {
+import com.example.radio.entities.Broadcast;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BroadcastRepository extends JpaRepository<Broadcast, Long> {
 }

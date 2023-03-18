@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link th:rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
 </head>
-<body>
-$END$
+<body class="p-2 mb-2 bg-dark text-white">
+<h1>Austria Radio</h1>
+<div id="links">
+    <a class="btn btn-primary" href="broadcasts">Broadcasts</a><br>
+    <a class="btn btn-primary" href="narrators">Narrators</a>
+</div>
+
+<script th:src="@{/webjars/jquery/3.6.3/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
 </body>
 </html>
