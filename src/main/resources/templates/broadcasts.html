@@ -16,6 +16,7 @@
             <th>Duration</th>
             <th>Cost</th>
             <th>Narrator</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +26,7 @@
             <td th:text="${b.duration}"></td>
             <td th:text="${b.cost}"></td>
             <td th:text="${b.narrator.name}"></td>
+            <td><a th:href="@{/part_broadcast/{id}(id=${b.id})}">edit broadcast</a></td>
         </tr>
         </tbody>
     </table>

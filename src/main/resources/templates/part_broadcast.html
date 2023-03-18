@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Broadcast</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css">
+  <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+</head>
+<body class="p-2 mb-2 bg-dark text-white">
+
+<h1 th:text="${broadcast.name}"></h1>
+
+<table class="table text-white">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Type of part</th>
+    <th>Name of singer/author/product</th>
+    <th>Song</th>
+    <th>Duration</th>
+    <th>Price</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="p : ${parts}">
+    <td th:text="${p.id}"></td>
+    <td th:text="${p.type}"></td>
+    <td th:text="${p.name}"></td>
+    <td th:text="${p.nameOfSong}"></td>
+    <td th:text="${p.duration}"></td>
+    <td th:text="${p.cost}"></td>
+    <td>
+      <form th:action="@{/deletePart}" method="post">
+        <input type="hidden" name="id" th:value="${p.id}">
+        <input type="submit" value="delete" class="btn btn-danger">
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<form th:action="@{/update_broadcast}" method="post">
+  <select name="type" id="type">
+    <option th:each="type:${types}" th:value="${type}" th:utext="${type}"></option>
+  </select>
+  <label for="broadcast_part_name">Name of Singer/Author/Product:</label>
+  <input type="text" name="name" id="broadcast_part_name" placeholder="Name of singer or author or product">
+  <label for="name_of_song">Name of song:</label>
+  <input type="text" name="name_of_song" id="name_of_song" placeholder="Name of song">
+  <label for="duration">Duration:</label>
+  <input type="text" name="duration" id="duration">
+  <input type="hidden" name="broadcast_id" th:value="${broadcast.id}">
+  <input type="submit" value="Add" class="btn btn-primary">
+</form>
+
+<script th:src="@{/webjars/jquery/3.6.3/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.16.1-1/umd/popper.min.js}"></script>
+
+</body>
+</html>

@@ -4,19 +4,25 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
 @Table(name = "part_of_broadcast")
 public class PartOfBroadcast {
 
-    public enum typeOfBroadcast {
+    public enum TypeOfBroadcast {
         SONG, INTERVIEW, ADVERTISING
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "type")
+    private TypeOfBroadcast type;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
@@ -30,7 +36,17 @@ public class PartOfBroadcast {
     @Column(name = "cost")
     private Double cost;
 
-    private Double calc() {
-        return cost = duration * 5 * 60;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "part_id")
+    private Broadcast broadcast;
+
+    public Double calc() {
+        if (type.name().equals("ADVERTISING"))
+            return cost = duration * 5 * 60;
+        if (type.name().equals("INTERVIEW"))
+            return cost = duration * 30;
+        else return null;
     }
 }
+
+//todo sort by id
