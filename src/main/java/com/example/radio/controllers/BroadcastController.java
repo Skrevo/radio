@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 @Controller
@@ -30,9 +29,10 @@ public class BroadcastController {
         return "redirect:broadcasts";
     }
 
-    @GetMapping("/part_broadcast/{id}")
-    public String editBroadcast(@PathVariable("id") int id, Model model) {
+    @GetMapping("/part_broadcast")
+    public String editBroadcast(@RequestParam("id") int id, Model model) {
         Optional<Broadcast> broadcast = broadcastRepository.findById(id);
+        if (broadcast.isEmpty()) return "redirect:broadcasts";
         model.addAttribute("broadcast", broadcast.get());
         model.addAttribute("parts", broadcast.get().getParts());
         model.addAttribute("types", PartOfBroadcast.TypeOfBroadcast.values());
@@ -47,6 +47,7 @@ public class BroadcastController {
                                    @RequestParam Integer broadcast_id)
     {
         Optional<Broadcast> broadcast = broadcastRepository.findById(broadcast_id);
+        if (broadcast.isEmpty()) return "redirect:broadcasts";
         PartOfBroadcast part = new PartOfBroadcast();
         part.setName(name);
         part.setNameOfSong(nameOfSong);

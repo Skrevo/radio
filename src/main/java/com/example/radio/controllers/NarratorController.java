@@ -25,8 +25,8 @@ public class NarratorController {
         return "redirect:narrators";
     }
 
-    @GetMapping("/narrator_broadcasts/{id}")
-    public String broadcastsByNarrator(@PathVariable("id") int id, Model model) {
+    @GetMapping("/narrator_broadcasts")
+    public String broadcastsByNarrator(@RequestParam("id") int id, Model model) {
         Optional<Narrator> narrator = narratorRepository.findById(id);
         if (narrator.isEmpty())
             return "redirect:narrators";
@@ -41,9 +41,10 @@ public class NarratorController {
         return "redirect:narrators";
     }
 
-    @GetMapping("/narrator_edit/{id}")
-    public String editNarrator(@PathVariable("id") int id, Model model) {
+    @GetMapping("/narrator_edit")
+    public String editNarrator(@RequestParam("id") int id, Model model) {
         Optional<Narrator> narrator = narratorRepository.findById(id);
+        if (narrator.isEmpty()) return "redirect:narrators";
         model.addAttribute("narrator", narrator.get());
         return "narrator_edit";
     }

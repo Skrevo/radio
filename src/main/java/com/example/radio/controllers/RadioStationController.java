@@ -30,6 +30,7 @@ public class RadioStationController {
         List<Narrator> narrators = narratorRepository.findAll();
         model.addAttribute("broadcasts", broadcasts);
         model.addAttribute("narrators", narrators);
+        broadcastRepository.saveAll(broadcasts);
         return "broadcasts";
     }
 

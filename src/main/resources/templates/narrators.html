@@ -10,7 +10,7 @@
 
 <h1>Narrators</h1>
 <table id="narrators" class="table text-white">
-    <thead>
+    <thead class="bg-primary">
     <tr>
         <th>#</th>
         <th>Name</th>
@@ -27,14 +27,14 @@
         <td th:text="${n.name}"></td>
         <td th:text="${n.experience}"></td>
         <td th:text="${n.resume}"></td>
-        <td><a th:href="@{/narrator_broadcasts/{id}(id=${n.id})}">show broadcasts</a></td>
+        <td><a th:href="@{/narrator_broadcasts(id=${n.id})}">show broadcasts</a></td>
         <td>
             <form th:action="@{/deleteNarrator}" method="post">
                 <input type="hidden" name="id" th:value="${n.id}">
                 <input type="submit" value="delete" class="btn btn-danger">
             </form>
         </td>
-        <td><a th:href="@{/narrator_edit/{id}(id=${n.id})}">edit</a></td>
+        <td><a th:href="@{/narrator_edit(id=${n.id})}">edit</a></td>
     </tr>
     </tbody>
 </table>

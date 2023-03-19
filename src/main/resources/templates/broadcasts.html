@@ -9,12 +9,12 @@
 <body class="p-2 mb-2 bg-dark text-white">
   <h1>Broadcast List</h1>
     <table id="broadcasts" class="table text-white">
-        <thead>
+        <thead class="bg-primary">
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Duration</th>
-            <th>Cost</th>
+            <th>Duration, min</th>
+            <th>Cost, €</th>
             <th>Narrator</th>
             <th></th>
         </tr>
@@ -26,7 +26,7 @@
             <td th:text="${b.duration}"></td>
             <td th:text="${b.cost}"></td>
             <td th:text="${b.narrator.name}"></td>
-            <td><a th:href="@{/part_broadcast/{id}(id=${b.id})}">edit broadcast</a></td>
+            <td><a th:href="@{/part_broadcast(id=${b.id})}">edit broadcast</a></td>
         </tr>
         </tbody>
     </table>

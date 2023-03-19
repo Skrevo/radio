@@ -3,7 +3,6 @@ package com.example.radio.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.SneakyThrows;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -54,4 +53,4 @@ public class Broadcast {
     }
 }
 
-//todo limit
+//todo message
