@@ -25,6 +25,8 @@ public class RadioStationController {
     @GetMapping("/broadcasts")
     public String broadcasts(Model model) {
         List<Broadcast> broadcasts = broadcastRepository.findAll();
+        broadcasts.forEach(Broadcast::calcCost);
+        broadcasts.forEach(Broadcast::calcDuration);
         List<Narrator> narrators = narratorRepository.findAll();
         model.addAttribute("broadcasts", broadcasts);
         model.addAttribute("narrators", narrators);

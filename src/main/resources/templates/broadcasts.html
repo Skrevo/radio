@@ -35,7 +35,7 @@
       <input type="text" name="name" id="broadcast_name">
       <label for="narrator_name">Narrator:</label>
       <select name="narrator" id="narrator_name">
-          <option th:each="narrator:${narrators}" th:value="${narrator}" th:utext="${narrator.getName()}"></option>
+          <option th:each="narrator:${narrators}" th:value="${narrator}" th:utext="${narrator.name}"></option>
       </select>
       <input type="submit" value="Add" class="btn btn-primary">
   </form>

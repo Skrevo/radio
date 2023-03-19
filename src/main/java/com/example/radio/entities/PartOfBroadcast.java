@@ -45,7 +45,7 @@ public class PartOfBroadcast {
             return cost = duration * 5 * 60;
         if (type.name().equals("INTERVIEW"))
             return cost = duration * 30;
-        else return null;
+        else return cost = duration * 0;
     }
 }
 

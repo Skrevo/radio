@@ -3,6 +3,7 @@ package com.example.radio.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,6 +13,10 @@ import java.util.Set;
 @Entity
 @Table(name = "broadcast")
 public class Broadcast {
+
+    private final double MAX_DURATION = 480;
+
+    private String message;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,9 +38,20 @@ public class Broadcast {
 
     @OneToMany
     @JoinColumn(name = "part_id")
-    private Set<PartOfBroadcast> part = new LinkedHashSet<>();
+    private Set<PartOfBroadcast> parts = new LinkedHashSet<>();
+
+
+    public Double calcCost() {
+      return cost = parts.stream().mapToDouble(PartOfBroadcast::getCost).sum();
+    }
+
+    public Double calcDuration() {
+        duration = parts.stream().mapToDouble(PartOfBroadcast::getDuration).sum();
+        if (duration > MAX_DURATION) {
+            message = "duration of all parts too long, please delete some parts or part from broadcast";
+        }
+        return duration;
+    }
 }
 
-//todo calc all parts of broadcast
-//todo calc all time of broadcast
 //todo limit

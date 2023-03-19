@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 @Controller
@@ -33,7 +34,7 @@ public class BroadcastController {
     public String editBroadcast(@PathVariable("id") int id, Model model) {
         Optional<Broadcast> broadcast = broadcastRepository.findById(id);
         model.addAttribute("broadcast", broadcast.get());
-        model.addAttribute("parts", broadcast.get().getPart());
+        model.addAttribute("parts", broadcast.get().getParts());
         model.addAttribute("types", PartOfBroadcast.TypeOfBroadcast.values());
         return "part_broadcast";
     }
@@ -54,6 +55,14 @@ public class BroadcastController {
         part.setCost(part.calc());
         part.setBroadcast(broadcast.get());
         partOfBroadcastRepository.save(part);
+        if (broadcast.get().getParts().stream().mapToDouble(PartOfBroadcast::getDuration).sum() > broadcast.get().getMAX_DURATION()){
+            partOfBroadcastRepository.delete(part);
+            broadcast.get().setMessage("Error!");
+        }
+        if (broadcast.get().getParts().stream().filter(part1 -> part1.getCost()!=0).mapToDouble(PartOfBroadcast::getDuration).sum() > broadcast.get().getMAX_DURATION()/2){
+            partOfBroadcastRepository.delete(part);
+            broadcast.get().setMessage("Error!");
+        }
         return "redirect:broadcasts";
     }
 
