@@ -58,11 +58,9 @@ public class BroadcastController {
         partOfBroadcastRepository.save(part);
         if (broadcast.get().getParts().stream().mapToDouble(PartOfBroadcast::getDuration).sum() > broadcast.get().getMAX_DURATION()){
             partOfBroadcastRepository.delete(part);
-            broadcast.get().setMessage("Error!");
         }
         if (broadcast.get().getParts().stream().filter(part1 -> part1.getCost()!=0).mapToDouble(PartOfBroadcast::getDuration).sum() > broadcast.get().getMAX_DURATION()/2){
             partOfBroadcastRepository.delete(part);
-            broadcast.get().setMessage("Error!");
         }
         return "redirect:broadcasts";
     }

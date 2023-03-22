@@ -15,8 +15,6 @@ public class Broadcast {
 
     private final double MAX_DURATION = 480;
 
-    private String message;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -46,9 +44,6 @@ public class Broadcast {
 
     public Double calcDuration() {
         duration = parts.stream().mapToDouble(PartOfBroadcast::getDuration).sum();
-        if (duration > MAX_DURATION) {
-            message = "duration of all parts too long, please delete some parts or part from broadcast";
-        }
         return duration;
     }
 }
