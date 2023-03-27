@@ -20,6 +20,7 @@
             <th>Cost, €</th>
             <th>Narrator</th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +30,12 @@
             <td th:text="${b.duration}"></td>
             <td th:text="${b.cost}"></td>
             <td th:text="${b.narrator.name}"></td>
+            <td>
+                <form th:action="@{/deleteBroadcast}" method="post">
+                    <input type="hidden" name="id" th:value="${b.id}">
+                    <input type="submit" value="delete" class="btn btn-danger">
+                </form>
+            </td>
             <td><a th:href="@{/part_broadcast(id=${b.id})}">edit broadcast</a></td>
         </tr>
         </tbody>
@@ -36,9 +43,9 @@
   <form action="add_broadcast" method="post">
       <label for="broadcast_name">Name:</label>
       <input type="text" name="name" id="broadcast_name">
-      <label for="narrator_name">Narrator:</label>
-      <select name="narrator" id="narrator_name">
-          <option th:each="narrator:${narrators}" th:value="${narrator}" th:utext="${narrator.name}"></option>
+      <label for="narrator_id">Narrator:</label>
+      <select name="narrator_id" id="narrator_id">
+          <option th:each="narrator:${narrators}" th:value="${narrator.id}" th:utext="${narrator.name}"></option>
       </select>
       <input type="submit" value="Add" class="btn btn-primary">
   </form>

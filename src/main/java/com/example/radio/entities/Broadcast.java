@@ -23,7 +23,7 @@ public class Broadcast {
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "duration", nullable = false)
+    @Column(name = "duration")
     private Double duration;
 
     @Column(name = "cost")
@@ -47,5 +47,3 @@ public class Broadcast {
         return duration;
     }
 }
-
-//todo message
